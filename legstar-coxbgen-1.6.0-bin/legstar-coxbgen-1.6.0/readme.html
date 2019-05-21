@@ -1,0 +1,170 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;1.&nbsp;Standalone Install instructions</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" title="Chapter&nbsp;1.&nbsp;Standalone Install instructions"><div class="titlepage"><div><div><h2 class="title"><a name="d4e1"></a>Chapter&nbsp;1.&nbsp;Standalone Install instructions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#coxbgen-installing-standalone">Installing COBOL Transformers Generator standalone</a></span></dt><dd><dl><dt><span class="section"><a href="#d4e9">Pre-requisites</a></span></dt><dt><span class="section"><a href="#d4e22">Installing</a></span></dt><dt><span class="section"><a href="#d4e31">Uninstalling</a></span></dt></dl></dd><dt><span class="section"><a href="#coxbgen-running-ant-samples">Running the Transformers ant samples</a></span></dt><dd><dl><dt><span class="section"><a href="#d4e36">Generate Transformers for the lsfileae adapter</a></span></dt><dt><span class="section"><a href="#d4e44">Generate Transformers for the jvmquery proxy</a></span></dt><dt><span class="section"><a href="#d4e49">Generate Transformers for the cultureinfo proxy</a></span></dt></dl></dd></dl></div>
+
+<div class="section" title="Installing COBOL Transformers Generator standalone"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="coxbgen-installing-standalone"></a>Installing COBOL Transformers Generator standalone</h2></div></div></div>
+
+<p>
+  These instructions apply if you are installing from the coxbgen standalone
+  distribution. If you are installing the complete LegStar distribution please
+  refer to <a class="ulink" href="http://www.legsem.com/legstar/legstar-distribution" target="_top">legstar distribution</a>.
+</p>
+<p>
+  Alternatively, the COBOL Transformers generator can be installed as an Eclipse plugin which
+  contains all the necessary components. More details
+  on this option are available on the
+  <a class="ulink" href="http://www.legsem.com/legstar/legstar-eclipse/index.html" target="_top">LegStar Eclipse site</a>.
+  However, the plugin does not include the samples. Furthermore, the libraries that you
+  would need to run your Transformers are not easily accessible with the plugin so we still
+  recommend that you perform a standalone installation as described in this document.
+</p>
+<div class="section" title="Pre-requisites"><div class="titlepage"><div><div><h3 class="title"><a name="d4e9"></a>Pre-requisites</h3></div></div></div>
+
+<p>
+  Java 1.5+ and ant 1.6.5+ are both prerequisites for LegStar.
+
+  This module requires a JDK, or an international version of the JRE,
+  that includes charsets.jar.
+
+  Make sure JAVA_HOME and ANT_HOME environment variables are set and that
+  $JAVA_HOME/bin (%JAVA_HOME%/bin on Windows) and $ANT_HOME/bin (%ANT_HOME%/bin
+  on Windows) are both in your system path.
+</p>
+<p>
+  Coxbgen relies on <a class="ulink" href="https://jaxb.dev.java.net/" target="_top">Sun's JAXB</a>.
+  The JAXB implementation must be at least 2.1 compliant. Such an implementation is part
+  of the LegStar distribution.
+</p>
+<p>
+  You will likely need the LegStar tools that generate XML Schemas with COBOL annotations
+  as this is the major input to COBOL Transformers generator:
+</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<p>
+    <a class="ulink" href="http://code.google.com/p/legstar-cob2xsd/" target="_top">COBOL to XML Schema Translator</a>:
+     used when the starting point is a COBOL structure.
+</p>
+</li><li class="listitem">
+<p>
+    <a class="ulink" href="http://code.google.com/p/legstar-xsd2cob/" target="_top">XML Schema to COBOL Translator</a>:
+     used when the starting point is a Java class, an XML Schema or a WSDL.
+</p>
+</li></ul></div>
+</div>
+
+<div class="section" title="Installing"><div class="titlepage"><div><div><h3 class="title"><a name="d4e22"></a>Installing</h3></div></div></div>
+
+<p>
+  Download the latest <a class="ulink" href="download.html" target="_top">coxbgen standalone distribution</a>.
+</p>
+<p>
+ Unzip the binary distribution package into the directory of your choice,
+ referred to as &lt;installDir&gt; in the following steps.
+</p>
+
+<p>
+   The directory tree should look like this:
+</p>
+   
+<pre class="programlisting">
+
+    &lt;installDir&gt;
+      |--&gt;LICENSE
+      |--&gt;NOTICE
+      |--&gt;readme.html
+      |--&gt;&lt;samples&gt;
+          |--&gt;&lt;quickstarts&gt;
+              |--&gt;&lt;adapter_lsfileae&gt;
+                  |--&gt;build-jaxb.xml
+                  |--&gt;build-coxb.xml
+                  |--&gt;&lt;schema&gt;
+                      |--&gt;lsfileae.xsd
+              |--&gt;&lt;proxy_pojo_jvmquery&gt;
+                  |--&gt;build-jaxb.xml
+                  |--&gt;build-coxb.xml
+                  |--&gt;&lt;src&gt;
+                      |--&gt;**/*.java
+                  |--&gt;&lt;schema&gt;
+                      |--&gt;jvmquery.xsd
+              |--&gt;&lt;proxy_ws_cultureinfo&gt;
+                  |--&gt;build-jaxb.xml
+                  |--&gt;build-coxb.xml
+                  |--&gt;&lt;schema&gt;
+                      |--&gt;jvmquery.xsd
+      |--&gt;&lt;lib&gt;
+          |--&gt;*.jar
+
+
+</pre>
+<p>
+   At this stage, you will probably want to <a class="link" href="#coxbgen-running-ant-samples" title="Running the Transformers ant samples">run the samples provided</a>
+</p>
+</div>
+
+<div class="section" title="Uninstalling"><div class="titlepage"><div><div><h3 class="title"><a name="d4e31"></a>Uninstalling</h3></div></div></div>
+
+<p>
+  To uninstall, remove the &lt;installDir&gt; folder.
+</p>
+</div>
+</div>
+
+<div class="section" title="Running the Transformers ant samples"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="coxbgen-running-ant-samples"></a>Running the Transformers ant samples</h2></div></div></div>
+
+
+<div class="section" title="Generate Transformers for the lsfileae adapter"><div class="titlepage"><div><div><h3 class="title"><a name="d4e36"></a>Generate Transformers for the lsfileae adapter</h3></div></div></div>
+
+<p>
+  run command <span class="emphasis"><em>ant -f build-coxb.xml</em></span> from the
+  samples/quickstarts/adapter_lsfileae folder and check the result.
+</p>
+<p>
+  build-coxb.xml uses the sample XML Schema in the schema folder.
+  It generates JAXB classes in the src folder in the
+  com.legstar.test.coxb.lsfileae package.
+</p>
+<p>
+  The JAXB classes are identical to the classes generated using Sun's
+  XJC utility apart from additional Java 5 annotations holding COBOL
+  meta-data.
+</p>
+<p>
+  Under the com.legstar.test.coxb.lsfileae.bind package, you
+  will find the Transformers classes. They are generated by
+  reflecting on the JAXB classes.
+</p>
+<p>
+  The Transformers classes provide a high performance alternative to
+  reflecting on the JAXB classes at runtime. They are used by
+  higher level LegStar modules.
+</p>
+</div>
+
+<div class="section" title="Generate Transformers for the jvmquery proxy"><div class="titlepage"><div><div><h3 class="title"><a name="d4e44"></a>Generate Transformers for the jvmquery proxy</h3></div></div></div>
+
+<p>
+  run command <span class="emphasis"><em>ant -f build-coxb.xml</em></span> from the
+  samples/quickstarts/proxy_pojo_jvmquery folder and check the result.
+</p>
+<p>
+  You will notice that there are 2 jaxbRootClass parameters in the
+  generateCOXB target. This is because the input and output structures
+  from the jvmQuery POJO are different.
+</p>
+</div>
+
+<div class="section" title="Generate Transformers for the cultureinfo proxy"><div class="titlepage"><div><div><h3 class="title"><a name="d4e49"></a>Generate Transformers for the cultureinfo proxy</h3></div></div></div>
+
+<p>
+  run command <span class="emphasis"><em>ant -f build-coxb.xml</em></span> from the
+  samples/quickstarts/proxy_ws_cultureinfo folder and check the result.
+</p>
+<p>
+  You will notice that there are 2 jaxbRootClass parameters in the
+  generateCOXB target. This is because the input and output structures
+  from the cultureinfo Web service are different.
+</p>
+</div>
+
+</div>
+</div></body></html>
